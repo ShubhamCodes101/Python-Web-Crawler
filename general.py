@@ -48,7 +48,7 @@ def file_to_set(file_name):
 # adding set items to file
 def set_to_file(links, file_name):
     delete_from_file(file_name)
-    for link in links:
+    for link in sorted(links):
         append_to_file(file_name, link)
 
 #create_folder('thenewboston')
