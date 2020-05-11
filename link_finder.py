@@ -21,10 +21,3 @@ class LinkFinder(HTMLParser):
 
     def error(self):
         pass
-
-
-
-
-#finder = LinkFinder()
-#finder.feed('<html><head><title>Page Title</title></head><body>'
-             #'<h1>This is a Heading</h1><p>This is a paragfraph.</p></body></html>')
