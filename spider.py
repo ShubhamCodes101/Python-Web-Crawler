@@ -23,14 +23,14 @@ class Spider:
         self.crawl_page('First Spider', Spider.base_url)
 
     @staticmethod
-    def boot(self):
+    def boot():
         create_folder(Spider.project_name)
         create_data_files(Spider.project_name, Spider.base_url)
         Spider.queue = file_to_set(Spider.queue_file)
         Spider.crawled = file_to_set(Spider.crawled_file)
 
     @staticmethod
-    def crawl_page(self, thread_name, page_url):
+    def crawl_page(thread_name, page_url):
         if page_url not in Spider.crawled:
             print(thread_name + ' currently crawling ' + page_url)
             print('Queue ' + str(len(Spider.queue)) + '| Crawled ' + str(len(Spider.crawled)))
@@ -39,7 +39,7 @@ class Spider:
             Spider.crawled.add(page_url)
             Spider.update_files()
 
-    def gather_links(self, page_url):
+    def gather_links(page_url):
         html_string = ''
         try:
             response = urlopen(page_url)
@@ -53,11 +53,12 @@ class Spider:
             return set()
         return finder.page_links()
 
-    def update_files(self):
+    @staticmethod
+    def update_files():
         set_to_file(Spider.queue, Spider.queue_file)
         set_to_file(Spider.crawled, Spider.crawled_file)
 
-    def add_links_to_queue(self, links):
+    def add_links_to_queue(links):
         for url in links:
             if url in Spider.queue:
                 continue
