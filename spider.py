@@ -39,6 +39,7 @@ class Spider:
             Spider.crawled.add(page_url)
             Spider.update_files()
 
+    @staticmethod
     def gather_links(page_url):
         html_string = ''
         try:
@@ -53,11 +54,8 @@ class Spider:
             return set()
         return finder.page_links()
 
-    @staticmethod
-    def update_files():
-        set_to_file(Spider.queue, Spider.queue_file)
-        set_to_file(Spider.crawled, Spider.crawled_file)
 
+    @staticmethod
     def add_links_to_queue(links):
         for url in links:
             if url in Spider.queue:
@@ -67,3 +65,8 @@ class Spider:
             if Spider.domain_name not in url:
                 continue
             Spider.queue.add(url)
+
+    @staticmethod
+    def update_files():
+        set_to_file(Spider.queue, Spider.queue_file)
+        set_to_file(Spider.crawled, Spider.crawled_file)
