@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from urllib import parse
 
+
 class LinkFinder(HTMLParser):
 
     def __init__(self, base_url, page_url):
@@ -13,10 +14,13 @@ class LinkFinder(HTMLParser):
         if tag == 'a':
             for (attribute, value) in attrs:
                 if attribute == 'href':
+                    print("inside if in handle fn")         # debugging
                     url = parse.urljoin(self.base_url, value)
+                    print(url)
                     self.links.add(url)
 
     def page_links(self):
+        # print(self.links)
         return self.links
 
     def error(self):

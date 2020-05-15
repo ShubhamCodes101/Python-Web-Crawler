@@ -43,17 +43,27 @@ class Spider:
     def gather_links(page_url):
         html_string = ''
         try:
+            print('inside try')                             # debugging
             response = urlopen(page_url)
-            if response.getheader('Content-Type') == 'text/html':
+            # print(response)
+            abc = response.getheader('Content-Type').split(';')
+            # print(abc)
+            if abc[0] == 'text/html':
+                print('inside try-if')                      # debugging
                 html_bytes = response.read()
-                html_string = html_bytes.decode("utf-8")
+                html_string = html_bytes.decode('utf-8')
             finder = LinkFinder(Spider.base_url, page_url)
             finder.feed(html_string)
         except:
             print("Error : Could not crawl pages")
             return set()
+        print('outside except')                             # debugging
         return finder.page_links()
 
+    @staticmethod
+    def update_files():
+        set_to_file(Spider.queue, Spider.queue_file)
+        set_to_file(Spider.crawled, Spider.crawled_file)
 
     @staticmethod
     def add_links_to_queue(links):
@@ -65,8 +75,3 @@ class Spider:
             if Spider.domain_name not in url:
                 continue
             Spider.queue.add(url)
-
-    @staticmethod
-    def update_files():
-        set_to_file(Spider.queue, Spider.queue_file)
-        set_to_file(Spider.crawled, Spider.crawled_file)
