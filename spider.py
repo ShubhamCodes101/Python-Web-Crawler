@@ -45,7 +45,6 @@ class Spider:
         try:
             print('inside try')                             # debugging
             response = urlopen(page_url)
-            # print(response)
             abc = response.getheader('Content-Type').split(';')
             # print(abc)
             if abc[0] == 'text/html':

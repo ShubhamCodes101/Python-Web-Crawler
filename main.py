@@ -6,8 +6,8 @@ from general import *
 
 
 # Adding Project information
-PROJECT_NAME = 'g4g'
-HOMEPAGE = 'https://www.geeksforgeeks.org/'
+PROJECT_NAME = input("Enter name of project:    ")
+HOMEPAGE = input("Enter url to start crawling: ")
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
