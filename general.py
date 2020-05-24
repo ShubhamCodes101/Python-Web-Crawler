@@ -1,4 +1,5 @@
 import os
+import sys
 
 
 # creating folder for each new website to be crawled
@@ -7,7 +8,8 @@ def create_folder(directory):
         print("Generating project folder : " + directory)
         os.makedirs(directory)
     else:
-        print("Project folder already exists !!!")
+        print("Project folder already exists...Try a different name !!!")
+        sys.exit("Exiting Program ..... ")
 
 
 # create queue for waiting links and crawled links

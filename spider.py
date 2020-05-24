@@ -1,6 +1,8 @@
 from urllib.request import urlopen
 from link_finder import LinkFinder
 from general import *
+import shutil
+import sys
 
 
 class Spider:
@@ -40,7 +42,7 @@ class Spider:
             Spider.update_files()
 
     @staticmethod
-    def gather_links(page_url):
+    def gather_links(page_url):         # add timeout here
         html_string = ''
         try:
             print('inside try')                             # debugging
@@ -53,9 +55,12 @@ class Spider:
                 html_string = html_bytes.decode('utf-8')
             finder = LinkFinder(Spider.base_url, page_url)
             finder.feed(html_string)
+
         except:
             print("Error : Could not crawl pages")
-            return set()
+            shutil.rmtree(Spider.project_name)
+            sys.exit("Exiting Program ..... ")
+
         print('outside except')                             # debugging
         return finder.page_links()
 
